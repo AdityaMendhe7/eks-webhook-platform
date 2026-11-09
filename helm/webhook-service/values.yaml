@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: 906915241954.dkr.ecr.ap-southeast-2.amazonaws.com/eks-webhook/webhook-service
-  tag: v2
+  tag: 513340a
 
 secretName: webhook-secret
 
