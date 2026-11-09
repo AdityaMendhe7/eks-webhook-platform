@@ -1,0 +1,23 @@
+replicaCount: 2
+
+image:
+  repository: 906915241954.dkr.ecr.ap-southeast-2.amazonaws.com/eks-webhook/webhook-service
+  tag: v2
+
+secretName: webhook-secret
+
+service:
+  port: 80
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 60
