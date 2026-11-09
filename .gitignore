@@ -3,3 +3,4 @@
 *.tfvars
 .env
 node_modules/
+app/dist/
