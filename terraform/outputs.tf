@@ -21,3 +21,7 @@ output "cluster_endpoint" {
 output "configure_kubectl" {
   value = "aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${var.region}"
 }
+
+output "ecr_repository_url" {
+  value = aws_ecr_repository.app.repository_url
+}
