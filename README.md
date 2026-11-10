@@ -37,9 +37,17 @@ These are single runs, and the before and after tests ran at different replica c
 
 ## Screenshots
 
-![ArgoCD](docs/argocd.png)
-![Grafana](docs/grafana.png)
+**Autoscaling under load:** HPA at 132% of the 60% CPU target with 4 replicas (scaled up from 2); two pods are seconds old.
+
 ![HPA scaling](docs/hpa-scaling.png)
+
+**Custom application metric in Grafana:** `webhook_requests_total` by result, scraped through the ServiceMonitor.
+
+![Grafana custom metric](docs/grafana-metric.png)
+
+**Pod CPU and memory (namespace webhook) at idle, before right-sizing:**
+
+![Grafana pods](docs/grafana-pods.png)
 
 ## Decisions and limitations
 
