@@ -1,0 +1,26 @@
+{{- if .Values.metrics.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  groups:
+    - name: webhook.rules
+      rules:
+        - alert: WebhookDown
+          expr: absent(up{job="{{ .Release.Name }}", namespace="{{ .Release.Namespace }}"} == 1)
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "No healthy webhook pods are being scraped"
+        - alert: WebhookRejectedSpike
+          expr: sum(rate(webhook_requests_total{result="rejected"}[2m])) > 1
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "More than 1 rejected webhook request per second"
+{{- end }}
