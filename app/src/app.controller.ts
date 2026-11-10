@@ -13,7 +13,7 @@ const webhookCounter = new Counter({
 export class AppController {
   @Get('healthz')
   health() {
-    return { status: 'ok' };
+    return { status: 'ok', build: 'gitops' };
   }
 
   @Post('webhook')
