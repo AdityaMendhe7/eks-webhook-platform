@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: webhook
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/AdityaMendhe7/eks-webhook-platform.git
+    targetRevision: main
+    path: helm/webhook-service
+    helm:
+      releaseName: webhook
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: webhook
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
